@@ -1,0 +1,5 @@
+/* pages/homePage/index.wxss */
+page, .container, .splash, .swiper-item, image{
+  height: 100%;
+}
+

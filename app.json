@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/homePage/index",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/movieList/index",
+    "pages/more/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#ff702c",
+    "navigationBarTitleText": "观影助手"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "backgroundColor": "#f7f7f7",
+    "list": [
+      {
+        "text": "榜单",
+        "pagePath": "pages/movieList/index",
+        "iconPath": "images/movie.png",
+        "selectedIconPath": "images/movie-active.png"
+      },
+      {
+        "text": "更多",
+        "pagePath": "pages/more/index",
+        "iconPath": "images/more.png",
+        "selectedIconPath": "images/more-active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "downloadFile": 20000
+  },
+  "debug": false,
+  "sitemapLocation": "sitemap.json"
+}
