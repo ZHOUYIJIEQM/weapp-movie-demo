@@ -1,1 +1,58 @@
 /* pages/movieList/index.wxss */
+page, .container{
+  width: 100%;
+  height: 100%;
+  background-color: #f3f3f3;
+}
+
+.scroll-nav{
+  position: relative;
+  height: 100rpx;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.nav{
+  box-sizing: border-box;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #fff;
+  color: #332e2e;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.nav-item{
+  width: 20%;
+  text-align: center;
+  display: inline-block;
+}
+.nav-item.active{
+  color: #f0421f;
+  font-weight: bold;
+}
+
+.nav-flag{
+  z-index: 101;
+  width: 20%;
+  position: absolute;
+  bottom: 0;
+  transition: left 0.2s;
+}
+.flag-inner{
+  width: 60%;
+  height: 10rpx;
+  margin: 0 auto;
+  background: #e23030;
+}
+
+.tab-box{
+  padding-top: 100rpx;
+  height: 100%;
+}
+.tab-content{
+  overflow-y: scroll;
+}

@@ -25,6 +25,19 @@ function getUserInfo () {
 }
 
 /**
+ * 获取系统信息
+ * @return {[type]} [description]
+ */
+function getSystemInfo () {
+  return new Promise((resolve, reject) => {
+    wx.getSystemInfo({
+      success: resolve,
+      fail: reject
+    });
+  });
+}
+
+/**
  * 设置本地缓存
  * @param {String} key 键
  * @param {any} value 值
@@ -72,6 +85,7 @@ function getLocation (type) {
 module.exports = {
   login,
   getUserInfo,
+  getSystemInfo,
   setStorage,
   getStorage,
   getLocation,

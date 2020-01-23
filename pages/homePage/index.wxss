@@ -1,5 +1,46 @@
 /* pages/homePage/index.wxss */
 page, .container, .splash, .swiper-item, image{
   height: 100%;
+  width: 100%;
 }
 
+/*swiper 自定义指示点*/
+.splash .wx-swiper-dot{
+  width: 50rpx;
+  height: 15rpx;
+  border-radius: 10rpx;
+}
+/*
+.splash .wx-swiper-dot{
+  background: #e8e8e8;
+}
+.splash .wx-swiper-dot-active{
+  background: #fa4513;
+}*/
+
+.click{
+  position: absolute;
+  bottom: 550rpx;
+  right: 30rpx;
+  width:250rpx;
+  height:250rpx;
+  box-sizing: border-box;
+}
+.clickAni{
+  width:250rpx;
+  height:250rpx;
+  background-color: #3bd3da;
+  border-radius: 50%;
+  animation: clickAnimate 2s ease-in-out 0s infinite;
+}
+
+@keyframes clickAnimate {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}

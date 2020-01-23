@@ -55,5 +55,7 @@ App({
       console.log(err)
     })
   },
+  globalData: {
 
+  }
 })
