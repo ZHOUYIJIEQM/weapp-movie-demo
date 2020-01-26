@@ -35,13 +35,13 @@ Page({
     return new Promise(resolve => {
       app.wechat.getStorage('last_splash_data')
         .then(res => {
-          console.log('getStorage', res);
+          // console.log('getStorage', res);
           const {movies, expires} = res.data;
           if(movies && expires > Date.now()){
             return resolve(res.data);
           }else{
             return resolve(null);
-          }          
+          }
         })
         .catch(e => resolve(null));
     });
@@ -60,7 +60,7 @@ Page({
       }
       app.douban.find('coming_soon', 1, 3)
         .then(data => {
-          console.log('coming_soon', data);
+          // console.log('coming_soon', data);
           // 返回的图片都是小的，改成大图地址
           data.subjects.forEach(item => {
             item.images.large = item.images.large.replace(/s_ra/, 'l_ra');

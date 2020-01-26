@@ -38,46 +38,37 @@ Page({
     // ],
     navData: [
       {
-        text: '首页'
+        text: '正在热映'
       }, 
       {
-        text: '健康'
-      }, 
-      {
-        text: '情感'
-      }, 
-      {
-        text: '职场'
-      }, 
-      {
-        text: '育儿'
-      }, 
-      {
-        text: '纠纷'
-      }, 
-      {
-        text: '青葱'
-      }, 
-      {
-        text: '上课'
-      }, 
-      {
-        text: '下课'
+        text: '更多电影'
       }
     ],     
     currentTab: 0,
     navScrollLeft: 0,
     navFlagLeft: 0,
     navLength: 0,
+    boards: [
+      // { key: 'in_theaters' },
+      { key: 'coming_soon' },
+      { key: 'new_movies' },
+      { key: 'top250' },
+    ],
+    inTheaters: null,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '拼命加载中...'
+    });
+
     app.wechat.getUserInfo()
       .then(res => {
-        console.log('userInfo', res);
+        // console.log('userInfo', res);
         app.globalData.userInfo = res.userInfo;
         this.setData({
           userInfo: res.userInfo,
@@ -87,7 +78,7 @@ Page({
 
     app.wechat.getSystemInfo()
       .then(res => {
-        console.log('systemInfo', res);
+        // console.log('systemInfo', res);
         var wWidth = res.windowWidth;
         var ratio = 750 / wWidth;
         console.log(ratio);
@@ -99,59 +90,110 @@ Page({
       });
       this.setData({
         navLength: this.data.navData.length,
-      })
+      });
+
+    app.douban.find('in_theaters', 1, 10)
+      .then(res => {
+        console.log(res.subjects)
+        this.setData({
+          inTheaters: res.subjects
+        })
+        wx.hideLoading();
+      });
+      
+    const tasks = this.data.boards.map(board => {
+      return app.douban.find(board.key, 1, 3)
+        .then(data => {
+          board.title = data.title;
+          board.movies = data.subjects;
+          console.log('data.key', board)
+          return board;
+        });
+    });
+    Promise.all(tasks).then(boards => {
+      this.setData({
+        boards: boards,
+        loading: false
+      });
+    });
+
   },
 
   switchNav(event){
     var cur = event.currentTarget.dataset.current; 
-    //每个tab选项宽度占1/5
-    var singleNavWidth = this.data.windowWidth / 5;
+    //每个tab选项宽度占1/长度
+    var singleNavWidth = this.data.windowWidth / this.data.navLength;
     //tab选项居中                            
     this.setData({
-        navScrollLeft: (cur - 2) * singleNavWidth
-    })      
+      navScrollLeft: (cur - 2) * singleNavWidth
+    });      
     if (this.data.currentTab == cur) {
-        return false;
+      return false;
     } else {
-        this.setData({
-            currentTab: cur
-        })
+      this.setData({
+        currentTab: cur
+      });
     }
   },
 
   switchTab(event){
     var cur = event.detail.current;
     // console.log(cur)
-    var singleNavWidth = this.data.windowWidth / 5;
+    var singleNavWidth = this.data.windowWidth / this.data.navLength;
     this.setData({
       currentTab: cur,
       navScrollLeft: (cur-2) * singleNavWidth,
     });
-    if(cur<3){
-      this.setData({
-        navFlagLeft: this.data.currentTab * singleNavWidth * this.data.pixelRatio
-      });
-    }else if(cur>=this.data.navLength-3){
-      console.log('-', this.data.navLength - this.data.currentTab);
-      this.setData({
-        navFlagLeft: (5 - (this.data.navLength - this.data.currentTab)) * singleNavWidth * this.data.pixelRatio
-      })
+    this.setData({
+      navFlagLeft: this.data.currentTab * singleNavWidth * this.data.pixelRatio
+    });
+    // if(cur<3){
+    //   this.setData({
+    //     navFlagLeft: this.data.currentTab * singleNavWidth * this.data.pixelRatio
+    //   });
+    // }else if(cur>=this.data.navLength-3){
+    //   console.log('-', this.data.navLength - this.data.currentTab);
+    //   this.setData({
+    //     navFlagLeft: (5 - (this.data.navLength - this.data.currentTab)) * singleNavWidth * this.data.pixelRatio
+    //   })
+    // }
+  },
+
+  switchTransition(event){
+    if(this.data.currentTab==0){
+      // console.log('0');
+      if(event.detail.dx>0){
+        this.setData({
+          navFlagLeft: event.detail.dx
+        });
+      }
+    }else if(this.data.currentTab == 1){
+      // console.log('1');
+      if(event.detail.dx<0){
+        this.setData({
+          navFlagLeft: this.data.windowWidth + event.detail.dx
+        });
+        if(this.data.navFlagLeft<0){
+          this.setData({
+            navFlagLeft: 0
+          });
+        }
+      }
     }
   },
 
-  switchtransition(event){
-    // // console.log('dx', event.detail.dx);
-    // var singleNavWidth = this.data.windowWidth / 5;
-    // var w = event.detail.dx/this.data.windowWidth * singleNavWidth / this.data.pixelRatio;
-    // console.log('+=', w);
-    // var navL = this.data.navFlagLeft + w;
-    // this.setData({
-    //   navFlagLeft: navL
-    // });
-    
+  animationFinish(event){
+    // console.log(event);
+    if(event.detail.current == 0){
+      this.setData({
+        navFlagLeft: 0
+      });
+    }else{
+      this.setData({
+        navFlagLeft: this.data.windowWidth * this.data.pixelRatio / this.data.navLength
+      });
+    }
   },
-
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成

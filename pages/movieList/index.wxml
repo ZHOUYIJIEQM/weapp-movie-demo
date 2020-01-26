@@ -31,16 +31,43 @@
     current="{{currentTab}}"
     duration="300"
     bindchange="switchTab"
-    bindtransition="switchtransition"
+    bindtransition="switchTransition"
+    bindanimationfinish="animationFinish"
   >
-    <swiper-item
-      class="tab-content"
-      wx:for="{{navData}}"
-      wx:for-item="tabItem"
-      wx:for-index="idx"
-      wx:key="idx"
-    >
-      {{tabItem.text}}
+    <swiper-item class="tab-content">
+      <scroll-view scroll-y="true">
+        <block wx:for="{{inTheaters}}" wx:key="id" >
+          <view class="movies-item">
+            <view class="movies-item-img">
+              <image class="movies-img" src="{{item.images.small}}" mode="widthFix"></image>
+            </view>
+            <view class="movies-item-content">
+              <view class="movies-title">
+                <text class="content-title">{{item.title}}</text>
+                <text class="boudan-grade"> 豆瓣评分: {{item.rating.average}}</text>
+              </view>
+              <view class="movies-collect_count">
+                <text class="count">{{item.collect_count}}</text> 人想看
+              </view>
+              <view class="movies-casts">
+                <text class="main">主演: </text>
+                <block wx:for="{{item.casts}}" wx:key="id">
+                  <text class="yellow">{{item.name}}  </text>
+                </block>
+              </view>
+              <view class="movies-mainland-pubdate">
+                <text class="pubdate">上映日期: </text>
+                <text class="yellow">{{item.mainland_pubdate}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y="true">
+        
+      </scroll-view>
     </swiper-item>
   </swiper> 
 </view>

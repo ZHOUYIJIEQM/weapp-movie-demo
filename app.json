@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/movieList/index",
     "pages/homePage/index",
+    "pages/movieList/index",
     "pages/index/index",
     "pages/logs/logs",
     

@@ -2,7 +2,8 @@
 <view class="container">
   <swiper class="splash" 
     indicator-dots="{{indicatorDots}}"
-    
+    indicator-color="{{indicatorColor}}"
+    indicator-active-color="{{indicatorActiveColor}}"
     duration="{{duration}}"
     interval="{{interval}}"
     autoplay="{{autoplay}}"

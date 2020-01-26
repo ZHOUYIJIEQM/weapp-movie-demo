@@ -52,8 +52,8 @@ App({
     this.baidu.getCityName().then(res => {
       console.log(JSON.parse(res.data).result.addressComponent.city)
     }).catch(err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   },
   globalData: {
 
