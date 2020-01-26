@@ -7,6 +7,7 @@
  */
 function fetch (api, path, params) {
   return new Promise((resolve, reject) => {
+    console.log('url', `${api}/${path}`);
     wx.request({
       url: `${api}/${path}`,
       data: Object.assign({}, params),

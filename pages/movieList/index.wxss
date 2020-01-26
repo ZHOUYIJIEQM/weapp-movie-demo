@@ -13,13 +13,13 @@ page, .container{
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: #faf7f7;
+  background-color: #f9f9f9;
 }
 
 .nav{
   box-sizing: border-box;
   height: 100%;
-  background-color: #fff;
+  /*background-color: #fff;*/
   color: #332e2e;
   font-size: 16px;
   white-space: nowrap;
@@ -91,6 +91,9 @@ page, .container{
 
 .movies-title{
   font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .content-title{
 }
@@ -119,4 +122,22 @@ page, .container{
 }
 .main, .pubdate{
   font-weight: bold;
+}
+
+.movies-type{
+  padding-top: 10rpx;
+  padding-left: 25rpx;
+  color: #191919;
+  font-weight: bold;
+}
+
+.watch-more{
+  text-align: center;
+  font-weight: bold;
+  width: 70%;
+  padding: 10rpx;
+  margin: 0 auto 35rpx;
+  border-radius: 50rpx;
+  background-color: #ff702c;
+  color: #fff;
 }

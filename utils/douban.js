@@ -27,7 +27,7 @@ function find (type, page=1, count=20, search="") {
   };
   return fetchApi(type, search ? Object.assign(params, {q: search}) : params)
     .then(res => res.data);
-}
+} 
 
 /**
  * 获取对应id的数据

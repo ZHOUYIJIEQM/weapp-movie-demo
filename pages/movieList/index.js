@@ -43,7 +43,8 @@ Page({
       {
         text: '更多电影'
       }
-    ],     
+    ], 
+    loading: true,    
     currentTab: 0,
     navScrollLeft: 0,
     navFlagLeft: 0,
@@ -56,6 +57,13 @@ Page({
     ],
     inTheaters: null,
 
+  },
+
+  goItem(event){
+    console.log(event.currentTarget.dataset.gid)
+    wx.navigateTo({
+      url: `/pages/movieItem/index?id=${event.currentTarget.dataset.gid}`
+    });
   },
 
   /**
@@ -97,16 +105,14 @@ Page({
         console.log(res.subjects)
         this.setData({
           inTheaters: res.subjects
-        })
-        wx.hideLoading();
+        });
       });
       
     const tasks = this.data.boards.map(board => {
       return app.douban.find(board.key, 1, 3)
         .then(data => {
           board.title = data.title;
-          board.movies = data.subjects;
-          console.log('data.key', board)
+          board.movies = data.subjects.slice(0, 3);
           return board;
         });
     });
@@ -115,7 +121,10 @@ Page({
         boards: boards,
         loading: false
       });
+      wx.hideLoading();
+      console.log('boards', this.data.boards)
     });
+
 
   },
 
@@ -147,16 +156,6 @@ Page({
     this.setData({
       navFlagLeft: this.data.currentTab * singleNavWidth * this.data.pixelRatio
     });
-    // if(cur<3){
-    //   this.setData({
-    //     navFlagLeft: this.data.currentTab * singleNavWidth * this.data.pixelRatio
-    //   });
-    // }else if(cur>=this.data.navLength-3){
-    //   console.log('-', this.data.navLength - this.data.currentTab);
-    //   this.setData({
-    //     navFlagLeft: (5 - (this.data.navLength - this.data.currentTab)) * singleNavWidth * this.data.pixelRatio
-    //   })
-    // }
   },
 
   switchTransition(event){
