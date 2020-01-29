@@ -1,0 +1,42 @@
+/* pages/typeList/index.wxss */
+.loading-img{
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  vertical-align: middle;
+}
+.load-text{
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin: 30rpx 0;
+  color: #323232;
+}
+
+.end{
+  display: inline-block;
+}
+.end text{
+  display: inline-block;
+  letter-spacing: 10rpx;
+  animation: bounce .5s cubic-bezier(0.05, 0, 0.2, 1) infinite alternate;
+}
+
+.end text:nth-child(1){
+  animation-delay: 0s;
+}
+.end text:nth-child(2){
+  animation-delay: 0.25s;
+}
+.end text:nth-child(3){
+  animation-delay: 0.5s;
+}
+
+@keyframes bounce{
+  0%{
+    transform: translate3d(0, 0, 0);
+  }
+  100%{
+    transform: translate3d(0, -10rpx, 0);
+  }
+}

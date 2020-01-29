@@ -2,10 +2,11 @@
   "pages": [
     "pages/movieList/index",
     "pages/homePage/index",
-    "pages/index/index",
-    "pages/logs/logs",
+    "pages/typeList/index",
     "pages/more/index",
-    "pages/movieItem/index"
+    "pages/movieItem/index",
+    "pages/index/index",
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,7 @@
+{ 
+  "navigationBarTitleText": "影片",
+  "usingComponents": {
+    "movie-item": "/pages/item/index"
+  },
+  "enablePullDownRefresh": true
+}

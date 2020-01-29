@@ -60,9 +60,16 @@ Page({
   },
 
   goItem(event){
-    console.log(event.currentTarget.dataset.gid)
+    // console.log(event.currentTarget.dataset.gid)
     wx.navigateTo({
       url: `/pages/movieItem/index?id=${event.currentTarget.dataset.gid}`
+    });
+  },
+
+  watchMore(event){
+    console.log(event.currentTarget.dataset.type)
+    wx.navigateTo({
+      url: `/pages/typeList/index?type=${event.currentTarget.dataset.type}&title=${event.currentTarget.dataset.title}`
     });
   },
 
@@ -70,6 +77,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setNavigationBarTitle({title: `榜单 > 正在热映`});
     wx.showLoading({
       title: '拼命加载中...'
     });
@@ -125,7 +133,15 @@ Page({
       console.log('boards', this.data.boards)
     });
 
+  },
 
+  // 设置标题
+  setTitle(cur){
+    if(cur==0){
+      wx.setNavigationBarTitle({title: `榜单 > 正在热映`});
+    }else if (cur==1) {
+      wx.setNavigationBarTitle({title: '榜单 > 更多电影'});
+    }
   },
 
   switchNav(event){
@@ -143,12 +159,14 @@ Page({
         currentTab: cur
       });
     }
+    this.setTitle(cur)
   },
 
   switchTab(event){
     var cur = event.detail.current;
     // console.log(cur)
     var singleNavWidth = this.data.windowWidth / this.data.navLength;
+    // 设置滚动距离
     this.setData({
       currentTab: cur,
       navScrollLeft: (cur-2) * singleNavWidth,
@@ -156,6 +174,7 @@ Page({
     this.setData({
       navFlagLeft: this.data.currentTab * singleNavWidth * this.data.pixelRatio
     });
+    this.setTitle(cur)
   },
 
   switchTransition(event){

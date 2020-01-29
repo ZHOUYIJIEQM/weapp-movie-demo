@@ -1,0 +1,22 @@
+<!--pages/typeList/index.wxml-->
+<view class="container">
+  <view class="list">
+    <block wx:for="{{moviesList}}" wx:key="id">
+      <movie-item movie="{{item}}"></movie-item>
+    </block>
+  </view>
+  <!-- <view wx:if="{{loading}}"> -->
+  <view>
+    <view wx:if="{{hasMore}}" class="load-text">
+      <image class="loading-img" src="/images/loading.gif" mode="aspectFill"/> 正在全力加载
+      <view class="end">
+        <text>.</text>
+        <text>.</text>
+        <text>.</text>
+      </view>
+    </view>
+    <view wx:else class="load-text">
+      没有更多内容了
+    </view>
+  </view>
+</view>

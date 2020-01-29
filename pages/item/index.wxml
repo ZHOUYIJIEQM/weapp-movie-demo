@@ -1,0 +1,25 @@
+<!--pages/item/index.wxml-->
+<view class="movies-item" data-gid="{{movie.id}}" bindtap="goItem">
+  <view class="movies-item-img">
+    <image class="movies-img" src="{{movie.images.small}}" mode="widthFix"></image>
+  </view>
+  <view class="movies-item-content">
+    <view class="movies-title">
+      <text class="content-title">{{movie.title}}</text>
+      <text class="boudan-grade"> 豆瓣评分: {{movie.rating.average}}</text>
+    </view>
+    <view class="movies-collect_count">
+      <text class="count">{{movie.collect_count}}</text> 人想看
+    </view>
+    <view class="movies-casts">
+      <text class="main">主演: </text>
+      <block wx:for="{{movie.casts}}" wx:key="id">
+        <text class="yellow">{{movie.name}} </text>
+      </block>
+    </view>
+    <view class="movies-mainland-pubdate">
+      <text class="pubdate">上映日期: </text>
+      <text class="yellow">{{movie.mainland_pubdate}}</text>
+    </view>
+  </view>
+</view>

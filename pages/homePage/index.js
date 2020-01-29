@@ -58,7 +58,7 @@ Page({
           loading: false
         });
       }
-      app.douban.find('coming_soon', 1, 3)
+      app.douban.find('coming_soon', 1, 5)
         .then(data => {
           // console.log('coming_soon', data);
           // 返回的图片都是小的，改成大图地址

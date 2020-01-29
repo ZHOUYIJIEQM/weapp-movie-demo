@@ -37,37 +37,39 @@
     <swiper-item class="tab-content">
       <scroll-view scroll-y="true" wx:if="{{!loading}}"> 
         <block wx:for="{{inTheaters}}" wx:key="id">
-          <view class="movies-item" data-gid="{{item.id}}" bindtap="goItem">
-            <view class="movies-item-img">
-              <image class="movies-img" src="{{item.images.small}}" mode="widthFix"></image>
+          <navigator url="../movieItem/index?id={{item.id}}">
+            <view class="movies-item" >
+              <view class="movies-item-img">
+                <image class="movies-img" src="{{item.images.small}}" mode="widthFix"></image>
+              </view>
+              <view class="movies-item-content">
+                <view class="movies-title">
+                  <text class="content-title">{{item.title}}</text>
+                  <text class="boudan-grade"> 豆瓣评分: {{item.rating.average}}</text>
+                </view>
+                <view class="movies-collect_count">
+                  <text class="count">{{item.collect_count}}</text>
+                  <text class="yellow">人想看</text>
+                </view>
+                <view class="movies-casts">
+                  <text class="main">主演: </text>
+                  <block wx:for="{{item.casts}}" wx:key="id">
+                    <text class="yellow">{{item.name}}  </text>
+                  </block>
+                </view>
+                <view class="movies-mainland-pubdate">
+                  <text class="pubdate">上映日期: </text>
+                  <text class="yellow">{{item.mainland_pubdate}}</text>
+                </view>
+              </view>
             </view>
-            <view class="movies-item-content">
-              <view class="movies-title">
-                <text class="content-title">{{item.title}}</text>
-                <text class="boudan-grade"> 豆瓣评分: {{item.rating.average}}</text>
-              </view>
-              <view class="movies-collect_count">
-                <text class="count">{{item.collect_count}}</text>
-                <text class="yellow">人想看</text>
-              </view>
-              <view class="movies-casts">
-                <text class="main">主演: </text>
-                <block wx:for="{{item.casts}}" wx:key="id">
-                  <text class="yellow">{{item.name}}  </text>
-                </block>
-              </view>
-              <view class="movies-mainland-pubdate">
-                <text class="pubdate">上映日期: </text>
-                <text class="yellow">{{item.mainland_pubdate}}</text>
-              </view>
-            </view>
-          </view>
+          </navigator>
         </block>
       </scroll-view>
     </swiper-item>
     <swiper-item>
-      <scroll-view scroll-y="true" wx:if="{{!loading}}">
-        <block wx:for="{{boards}}" wx:key="key">
+      <scroll-view class="more-movies" scroll-y="true" wx:if="{{!loading}}">
+        <view class="item-block" wx:for="{{boards}}" wx:key="key">
           <view class="movies-type">{{item.title}}</view>
           <block wx:for="{{item.movies}}" wx:key="id">
             <view class="movies-item" data-gid="{{item.id}}" bindtap="goItem">
@@ -95,10 +97,10 @@
               </view>
             </view>
           </block>
-          <view class="watch-more">
+          <view class="watch-more" data-title="{{item.title}}" data-type="{{item.key}}" bindtap="watchMore">  
             查看更多
           </view>
-        </block>
+        </view>
       </scroll-view>
     </swiper-item>
   </swiper> 
