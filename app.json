@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/movieList/index",
+    "pages/movieItem/index",
     "pages/homePage/index",
+    "pages/movieList/index",
     "pages/typeList/index",
     "pages/more/index",
-    "pages/movieItem/index",
     "pages/index/index",
     "pages/logs/logs"
   ],

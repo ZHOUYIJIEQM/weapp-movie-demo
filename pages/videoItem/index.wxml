@@ -1,0 +1,22 @@
+<!--pages/videoItem/index.wxml-->
+<view class="video-play" 
+  wx:if="{{show}}"
+  style="height: {{videoData.videoHeight}}rpx"
+> 
+  <view 
+    class="full-mask"
+    bindtap="handleShow"
+  ></view>
+  <video 
+    id="myVideo"
+    src="{{videoData.videoUrl}}"
+    autoplay="{{autoplay}}"
+    show-center-play-btn="{{false}}"
+  >
+    <cover-view wx:if="{{wantToPlay}}" class="mask">
+      <cover-image class="prev" src="{{videoData.pic}}"></cover-image>
+      <cover-image class="play" src="/images/video-play.png" bindtap="handlePlayVideo"></cover-image>
+    </cover-view>
+    
+  </video>
+</view>

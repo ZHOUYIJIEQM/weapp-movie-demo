@@ -41,7 +41,7 @@ App({
   */
 
   data:{
-
+    currentCity: '',
   },
 
   wechat: WECHAT,
@@ -50,7 +50,10 @@ App({
 
   onLaunch: function () {
     this.baidu.getCityName().then(res => {
-      console.log(JSON.parse(res.data).result.addressComponent.city)
+      console.log(JSON.parse(res.data).result.addressComponent.city);
+      // this.setData({
+      //   currentCity: JSON.parse(res.data).result.addressComponent.city
+      // });
     }).catch(err => {
       console.log(err);
     });

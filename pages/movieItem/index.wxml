@@ -1,2 +1,91 @@
 <!--pages/movieItem/index.wxml-->
-<text>pages/movieItem/index.wxml</text>
+<view class="container" wx:if="{{movieDetail}}">
+  <view class="detail-panel">
+    <view class="panel-bg" style="background-image: url({{movieDetail.images.small}});"></view>
+    <view class="mask"></view>
+    <view class="movie-content">
+      <view class="image">
+        <image src="{{movieDetail.images.small}}" mode="widthFix"></image>
+      </view>
+      <view class="content">
+        <view class="movie-title">
+          <text class="title">{{movieDetail.title}}</text>
+          <text class="douban-average"> 豆瓣评分: {{movieDetail.rating.average}}</text>
+        </view>
+        <view class="movie-like">
+          <text class="count">{{movieDetail.wish_count}}</text>
+          <text>人想看</text>
+        </view>
+        <view class="movie-tags">
+          分类: {{tags}}
+        </view>
+        <view class="movie-durations">
+          时长: {{movieDetail.durations[0]}}
+        </view> 
+        <view class="movie-pubdates">
+          开播: {{pubdates}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="movie-descript">
+    <view class="movie-summary {{isCollapse ? 'open' : ''}}">
+      <view class="summary">
+        {{movieDetail.summary}}
+      </view>
+      <view class="down" bindtap="showAll"><text>></text></view>
+    </view>
+    <view class="casts">
+      <view class="actor-list">演员:</view>
+      <scroll-view 
+        style="white-space: nowrap;"
+        scroll-x="true"
+      >
+        <view class="actor"
+          wx:for="{{actor}}" wx:key="index"
+          bindtap="previewCasts" data-index="{{index}}"
+        >
+          <image class="actor-pic" src="{{item.avatars.small}}"></image>
+          <view class="actor-name">{{item.name}}</view>
+          <view class="actor-name-en">{{item.name_en}}</view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="preview">
+      <view class="actor-list">预告片及剧照:</view>
+      <scroll-view 
+        style="white-space: nowrap;"
+        scroll-x="true"
+      > 
+        <!-- 预告片 -->
+        <view class="pre-video"
+          wx:for="{{previewVideo}}" 
+          wx:key="index"
+          data-index="{{index}}"
+          bindtap="handleVideo"
+        > 
+          <image class="pic" src="{{item.medium}}">
+            <image class="playicon" src="/images/video-play.png"></image>
+          </image>
+          <view class="actor-name">{{item.title}}</view>
+        </view>
+        <!-- 剧照 -->
+        <view class="pre-video"
+          wx:for="{{previewPhotos}}" wx:key="index"
+          bindtap="previewPic" data-index="{{index}}"
+        >
+          <image class="pic" src="{{item.image}}"></image>
+          <view class="actor-name">剧照</view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <video-item 
+      show="{{videoShow}}" 
+      videoData="{{videoData}}"
+      bind:handleShowVideo="handleShow"
+    ></video-item>
+
+  </view>
+</view>

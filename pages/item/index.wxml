@@ -14,7 +14,7 @@
     <view class="movies-casts">
       <text class="main">主演: </text>
       <block wx:for="{{movie.casts}}" wx:key="id">
-        <text class="yellow">{{movie.name}} </text>
+        <text class="yellow">{{item.name}} </text>
       </block>
     </view>
     <view class="movies-mainland-pubdate">

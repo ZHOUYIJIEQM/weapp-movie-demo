@@ -67,7 +67,7 @@ Page({
   },
 
   watchMore(event){
-    console.log(event.currentTarget.dataset.type)
+    // console.log(event.currentTarget.dataset.type)
     wx.navigateTo({
       url: `/pages/typeList/index?type=${event.currentTarget.dataset.type}&title=${event.currentTarget.dataset.title}`
     });
@@ -97,7 +97,7 @@ Page({
         // console.log('systemInfo', res);
         var wWidth = res.windowWidth;
         var ratio = 750 / wWidth;
-        console.log(ratio);
+        // console.log(ratio);
         this.setData({
           pixelRatio: ratio,
           windowHeight: res.windowHeight,
@@ -110,7 +110,7 @@ Page({
 
     app.douban.find('in_theaters', 1, 10)
       .then(res => {
-        console.log(res.subjects)
+        // console.log(res.subjects)
         this.setData({
           inTheaters: res.subjects
         });
@@ -130,7 +130,7 @@ Page({
         loading: false
       });
       wx.hideLoading();
-      console.log('boards', this.data.boards)
+      // console.log('boards', this.data.boards)
     });
 
   },

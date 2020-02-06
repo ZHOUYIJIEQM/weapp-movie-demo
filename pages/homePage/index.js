@@ -51,6 +51,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '正在加载...'
+    })
     this.getCache().then(cache => {
       if(cache){
         return this.setData({
@@ -70,6 +73,7 @@ Page({
             movies: data.subjects,
             loading: false
           });
+          wx.hideLoading();
           return app.wechat.setStorage('last_splash_data', {
             movies: data.subjects,
             expiress: Date.now() + 24 * 60 * 60 * 1000
