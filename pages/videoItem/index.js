@@ -31,7 +31,7 @@ Component({
 
     handlePlayVideo(){
       if(this.data.show){
-        this.videoContext = wx.createVideoContext('myVideo')
+        this.videoContext = wx.createVideoContext('myVideo', this)
         console.log(this.videoContext, '开始播放');
       }
       this.setData({
