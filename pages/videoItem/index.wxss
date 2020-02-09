@@ -43,3 +43,13 @@ video{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.close{
+  width: 50rpx;
+  height: 50rpx;
+  padding: 50rpx;
+  z-index: 10;
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+}

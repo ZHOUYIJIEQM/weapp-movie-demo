@@ -13,9 +13,14 @@ Page({
     actor: [],
     previewVideo: [],
     previewPhotos: [],
+    popularReviews: [],
+    popularComments: [],
     videoData: null,
     videoHeight: 0,
     videoShow: false,
+    showReviews: [],
+    showReviewsFlag: 3,
+    moreText: '加载更多...',
   },
 
   showAll(){
@@ -66,6 +71,24 @@ Page({
     });
   },
 
+  moreComment(){
+    if(this.data.showReviewsFlag+3<=this.data.popularReviews.length){
+      this.setData({
+        showReviewsFlag: this.data.showReviewsFlag+3
+      });
+      console.log('this.data.showReviewsFlag')
+    }else{
+      console.log('超过了')
+      this.setData({
+        showReviewsFlag: this.data.popularReviews.length,
+        moreText: '暂无更多'
+      });
+    }
+    this.setData({
+      showReviews: this.data.popularReviews.slice(0, this.data.showReviewsFlag),
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -75,8 +98,8 @@ Page({
       title: '拼命加载中...'
     });
 
-    // app.douban.findById(params.id)
-    app.douban.findById("30176393")
+    app.douban.findById(params.id)
+    // app.douban.findById("30176393")
       .then(data => {
         wx.setNavigationBarTitle({
           title: `${data.title} > 电影详情`
@@ -87,9 +110,10 @@ Page({
           actor: data.directors.concat(data.casts),
           previewVideo: data.trailers,
           previewPhotos: data.photos,
+          popularReviews: data.popular_reviews,
+          popularComments: data.popular_comments,
+          showReviews: data.popular_reviews.slice(0, this.data.showReviewsFlag),
         });
-        console.log(this.data.previewVideo);
-        console.log(this.data.previewPhotos);
         if(data.pubdates[1]){
           this.setData({
             pubdates: data.pubdates[1]

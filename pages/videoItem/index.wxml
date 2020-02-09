@@ -3,15 +3,19 @@
   wx:if="{{show}}"
   style="height: {{videoData.videoHeight}}rpx"
 > 
-  <view 
-    class="full-mask"
+  <view class="full-mask" bindtap="handleShowClose"></view>
+  <image 
+    wx:if="{{showClose}}"
+    class="close" 
+    src="/images/close.png"
     bindtap="handleShow"
-  ></view>
+  ></image>
   <video 
     id="myVideo"
     src="{{videoData.videoUrl}}"
-    autoplay="{{autoplay}}"
     show-center-play-btn="{{false}}"
+    vslide-gesture="{{true}}"
+    bindtap="handleShowClose"
   >
     <cover-view wx:if="{{wantToPlay}}" class="mask">
       <cover-image class="prev" src="{{videoData.pic}}"></cover-image>

@@ -54,6 +54,7 @@
 
     <view class="preview">
       <view class="actor-list">预告片及剧照:</view>
+
       <scroll-view 
         style="white-space: nowrap;"
         scroll-x="true"
@@ -66,7 +67,7 @@
           bindtap="handleVideo"
         > 
           <image class="pic" src="{{item.medium}}">
-            <image class="playicon" src="/images/video-play.png"></image>
+            <image class="playicon" src="/images/video-play.png" ></image>
           </image>
           <view class="actor-name">{{item.title}}</view>
         </view>
@@ -79,13 +80,52 @@
           <view class="actor-name">剧照</view>
         </view>
       </scroll-view>
+      <video-item 
+        show="{{videoShow}}" 
+        videoData="{{videoData}}"
+        bind:handleShowVideo="handleShow"
+      ></video-item>
     </view>
 
-    <video-item 
-      show="{{videoShow}}" 
-      videoData="{{videoData}}"
-      bind:handleShowVideo="handleShow"
-    ></video-item>
+    <!-- <view class="comments">
+      <view class="c-title">{{movieDetail.title}} > 精选短评:</view>
+      <view class="c-content"
+        wx:for="{{popularComments}}"
+        wx:key="index"
+      >
+        <view class="author">
+          <image class="author-pic" src="{{item.author.avatar}}"></image>
+          <view class="author-name">{{item.author.name}}</view>
+        </view>
+        <view class="c-comment">
+          <view class="comment-content">{{item.content}}</view>
+          <view class="created">{{item.created_at}}</view>
+        </view>
+      </view>
+      <view class="more-comment">暂无更多</view>
+    </view> -->
+
+    <view class="reviews">
+      <view class="c-title">{{movieDetail.title}} > 电影讨论:</view>
+      <view wx:if="popularReviews.lenght">
+        <view class="c-content" wx:for="{{showReviews}}" wx:key="index">
+          <view class="author">
+            <image class="author-pic" src="{{item.author.avatar}}"></image>
+            <view class="author-name">{{item.author.name}}</view>
+          </view>
+          <view class="comment">
+            <view class="comment-title">{{item.title}}</view>
+            <view class="comment-content">{{item.summary}}</view>
+          </view>
+        </view>
+        <view class="more-comment"
+        bindtap="moreComment"
+        >{{moreText}}</view>
+      </view>
+      <view wx:else style="text-align: center;">
+        暂无评论
+      </view>
+    </view>
 
   </view>
 </view>
