@@ -13,13 +13,15 @@
     </view>
     <view class="movies-casts">
       <text class="main">主演: </text>
-      <block wx:for="{{movie.casts}}" wx:key="id">
+      <block wx:for="{{casts}}" wx:key="index">
         <text class="yellow">{{item.name}} </text>
       </block>
     </view>
     <view class="movies-mainland-pubdate">
       <text class="pubdate">上映日期: </text>
-      <text class="yellow">{{movie.mainland_pubdate}}</text>
+      <text class="yellow" wx:if="{{movie.mainland_pubdate}}">{{movie.mainland_pubdate}}</text>
+      <text class="yellow" wx:elif="{{movie.pubdates[1]}}">{{movie.pubdates[1]}}</text>
+      <text class="yellow" wx:else="{{movie.pubdates[0]}}">{{movie.pubdates[0]}}</text>
     </view>
   </view>
 </view>

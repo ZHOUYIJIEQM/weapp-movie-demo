@@ -38,7 +38,7 @@ Page({
     // ],
     navData: [
       {
-        text: '正在热映'
+        text: '即将上映'
       }, 
       {
         text: '更多电影'
@@ -49,16 +49,18 @@ Page({
     navScrollLeft: 0,
     navFlagLeft: 0,
     navLength: 0,
+    navTitle: '正在上演的电影',
     boards: [
       // { key: 'in_theaters' },
-      { key: 'coming_soon' },
-      { key: 'new_movies' },
       { key: 'top250' },
+      { key: 'new_movies' },
+      { key: 'coming_soon' },
     ],
     inTheaters: null,
 
   },
 
+  // 跳转到电影详情 
   goItem(event){
     // console.log(event.currentTarget.dataset.gid)
     wx.navigateTo({
@@ -66,6 +68,7 @@ Page({
     });
   },
 
+  // 点击查看更多 电影列表
   watchMore(event){
     // console.log(event.currentTarget.dataset.type)
     wx.navigateTo({
@@ -77,7 +80,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({title: `榜单 > 正在热映`});
+    
     wx.showLoading({
       title: '拼命加载中...'
     });
@@ -108,14 +111,19 @@ Page({
         navLength: this.data.navData.length,
       });
 
-    app.douban.find('in_theaters', 1, 10)
+    // 获取正在上映的电影
+    // app.douban.find('in_theaters', 1, 10)
+    app.douban.find('coming_soon')
       .then(res => {
-        // console.log(res.subjects)
+        // console.log('in_theaters', res)
         this.setData({
-          inTheaters: res.subjects
+          inTheaters: res,
+          // navTitle: res.title
         });
+        wx.setNavigationBarTitle({title: res.title});
       });
-      
+    
+    // 获取更多电影
     const tasks = this.data.boards.map(board => {
       return app.douban.find(board.key, 1, 3)
         .then(data => {
@@ -132,18 +140,18 @@ Page({
       wx.hideLoading();
       // console.log('boards', this.data.boards)
     });
-
   },
 
   // 设置标题
   setTitle(cur){
     if(cur==0){
-      wx.setNavigationBarTitle({title: `榜单 > 正在热映`});
+      wx.setNavigationBarTitle({title: this.data.navTitle});
     }else if (cur==1) {
       wx.setNavigationBarTitle({title: '榜单 > 更多电影'});
     }
   },
 
+  // 点击tab标签
   switchNav(event){
     var cur = event.currentTarget.dataset.current; 
     //每个tab选项宽度占1/长度
@@ -162,6 +170,7 @@ Page({
     this.setTitle(cur)
   },
 
+  // 滑动切换
   switchTab(event){
     var cur = event.detail.current;
     // console.log(cur)
@@ -177,6 +186,7 @@ Page({
     this.setTitle(cur)
   },
 
+  // 滑动切换过程触发
   switchTransition(event){
     if(this.data.currentTab==0){
       // console.log('0');
@@ -200,6 +210,7 @@ Page({
     }
   },
 
+  // 滑动切换结束
   animationFinish(event){
     // console.log(event);
     if(event.detail.current == 0){

@@ -11,7 +11,13 @@ Component({
    * 组件的初始数据
    */
   data: {
+    casts: null,
+  },
 
+  ready(){
+    this.setData({
+      casts: this.data.movie.casts.concat(this.data.movie.directors)
+    });
   },
 
   /**

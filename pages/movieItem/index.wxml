@@ -107,7 +107,7 @@
 
     <view class="reviews">
       <view class="c-title">{{movieDetail.title}} > 电影讨论:</view>
-      <view wx:if="popularReviews.lenght">
+      <view wx:if="{{popularReviews.length}}">
         <view class="c-content" wx:for="{{showReviews}}" wx:key="index">
           <view class="author">
             <image class="author-pic" src="{{item.author.avatar}}"></image>
@@ -119,10 +119,10 @@
           </view>
         </view>
         <view class="more-comment"
-        bindtap="moreComment"
+          bindtap="moreComment"
         >{{moreText}}</view>
       </view>
-      <view wx:else style="text-align: center;">
+      <view wx:else style="text-align: center; padding: 25rpx 0;">
         暂无评论
       </view>
     </view>

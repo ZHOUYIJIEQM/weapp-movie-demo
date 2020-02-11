@@ -32,7 +32,7 @@ Page({
   previewCasts(event){
     let pic = this.data.actor;
     let urls = pic.map(photos => {
-      console.log(photos.avatars.large.replace(/s_/, 'l_'))
+      // console.log(photos.avatars.large.replace(/s_/, 'l_'))
       return photos.avatars.large.replace(/s_/, 'l_');
     });
     wx.previewImage({
@@ -62,7 +62,7 @@ Page({
       ['videoData.videoHeight']: 750 / windowW * windowH,
       videoShow: true,
     });
-    console.log('基础库2.10.1的问题===========', this.data.videoData);
+    // console.log('elem 报错是 基础库2.10.1的问题===========', this.data.videoData);
   },
 
   handleShow(e){
@@ -76,9 +76,9 @@ Page({
       this.setData({
         showReviewsFlag: this.data.showReviewsFlag+3
       });
-      console.log('this.data.showReviewsFlag')
+      // console.log('this.data.showReviewsFlag')
     }else{
-      console.log('超过了')
+      // console.log('超过了')
       this.setData({
         showReviewsFlag: this.data.popularReviews.length,
         moreText: '暂无更多'
@@ -93,7 +93,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (params) {
-    console.log(params);
+    // console.log(params);
     wx.showLoading({
       title: '拼命加载中...'
     });

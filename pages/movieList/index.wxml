@@ -34,15 +34,17 @@
     bindtransition="switchTransition"
     bindanimationfinish="animationFinish"
   >
+    <!-- 正在热映 -->
     <swiper-item class="tab-content">
       <scroll-view scroll-y="true" wx:if="{{!loading}}"> 
-        <block wx:for="{{inTheaters}}" wx:key="id">
+        <block wx:for="{{inTheaters.subjects}}" wx:key="id">
           <movie-item movie="{{item}}"></movie-item>
         </block>
       </scroll-view>
     </swiper-item>
     <swiper-item>
       <scroll-view class="more-movies" scroll-y="true" wx:if="{{!loading}}">
+        <!-- 更多电影 -->
         <view class="item-block" wx:for="{{boards}}" wx:key="key">
           <view class="movies-type">{{item.title}}</view>
           <block wx:for="{{item.movies}}" wx:key="id">

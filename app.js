@@ -41,7 +41,7 @@ App({
   */
 
   data:{
-    currentCity: '',
+
   },
 
   wechat: WECHAT,
@@ -49,13 +49,15 @@ App({
   douban: DOUBAN,
 
   onLaunch: function () {
-    this.baidu.getCityName().then(res => {
-      console.log(JSON.parse(res.data).result.addressComponent.city);
-      // this.setData({
-      //   currentCity: JSON.parse(res.data).result.addressComponent.city
-      // });
-    }).catch(err => {
-      console.log(err);
+    this.wechat.getLocation().then(res => {
+      console.log('地理位置', res);
+      // this.baidu.getCityName(23.107441, 113.330798).then(res => {
+      this.baidu.getCityName(res.latitude, res.longitude).then(res => {
+        console.log(JSON.parse(res.data).result.addressComponent.city);
+        this.globalData.currentCity = JSON.parse(res.data).result.addressComponent.city;
+      }).catch(err => {
+        console.log(err);
+      });
     });
   },
   globalData: {

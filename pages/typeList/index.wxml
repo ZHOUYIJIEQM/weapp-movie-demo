@@ -1,7 +1,7 @@
 <!--pages/typeList/index.wxml-->
 <view class="container">
   <view class="list">
-    <block wx:for="{{moviesList}}" wx:key="id">
+    <block wx:for="{{moviesList}}" wx:key="index">
       <movie-item movie="{{item}}"></movie-item>
     </block>
   </view>

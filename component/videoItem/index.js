@@ -35,14 +35,14 @@ Component({
 
     // 显示/隐藏关闭图标
     handleShowClose(){
-      console.log('关闭图标')
+      // console.log('关闭图标')
       this.setData({
         showClose: !this.data.showClose
       });
       if(this.data.showClose){
         clearTimeout(timer);
         timer = setTimeout(() => {
-          console.log('执行隐藏');
+          // console.log('执行隐藏');
           this.setData({
             showClose: false
           });
@@ -54,7 +54,7 @@ Component({
     handlePlayVideo(){
       if(this.data.show){
         this.videoContext = wx.createVideoContext('myVideo', this)
-        console.log(this.videoContext, '开始播放');
+        // console.log(this.videoContext, '开始播放');
       }
       this.setData({
         wantToPlay: !this.data.wantToPlay,

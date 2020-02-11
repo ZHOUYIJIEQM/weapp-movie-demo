@@ -1,2 +1,22 @@
 <!--pages/more/index.wxml-->
-<text>pages/more/index.wxml</text>
+<view class="container">
+  <view class="search">
+    <view class="inner">
+      <input type="text" placeholder="请输入电影名称" placeholder-class="input-placeholder" />
+      <image src="/images/search.png" class="search-img" bindtap="movieSearch"></image>
+    </view>
+  </view>
+
+  <view class="user">
+    <view class="user-info" wx:if="{{userInfo.nickName}}">
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nikcname">{{userInfo.nickName}}</text>
+    </view>
+    <button wx:if="{{!userInfo.nickName}}" class="login" open-type="getUserInfo" bindgetuserinfo="getUserInfo">点击登录</button>
+  </view>
+
+  <view class="mini-pro-info">
+    <view style="text-align: center;">小程序测试版</view>
+  </view>
+
+</view>

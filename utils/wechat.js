@@ -72,7 +72,7 @@ function getStorage (key) {
  * @param  {String} type 坐标
  * @return {[type]}      [description]
  */
-function getLocation (type) {
+function getLocation (type='wgs84') {
   return new Promise((resolve, reject) => {
     wx.getLocation({
       type: type,

@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "影片详情",
   "usingComponents": {
-    "video-item": "/pages/videoItem/index"
+    "video-item": "/component/videoItem/index"
   }
 }

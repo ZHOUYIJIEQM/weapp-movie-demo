@@ -1,12 +1,10 @@
 {
   "pages": [
     "pages/homePage/index",
-    "pages/movieItem/index",
-    "pages/movieList/index",
-    "pages/typeList/index",
     "pages/more/index",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/movieList/index",
+    "pages/movieItem/index",
+    "pages/typeList/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,7 +16,7 @@
     "color": "#666666",
     "selectedColor": "#000000",
     "borderStyle": "black",
-    "backgroundColor": "#f7f7f7",
+    "backgroundColor": "#fafafa",
     "list": [
       {
         "text": "榜单",
@@ -37,6 +35,11 @@
   "networkTimeout": {
     "request": 20000,
     "downloadFile": 20000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "小程序需要使用地理位置"
+    }
   },
   "debug": false,
   "sitemapLocation": "sitemap.json"

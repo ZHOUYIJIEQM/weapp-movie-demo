@@ -1,18 +1,42 @@
 // pages/more/index.js
+const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userInfo: {},
+    canIUse: wx.canIUse('button.open-type.getUserInfo'), //当前版本能否用 某个api 
+  },
 
+  getUserInfo(e){
+    let userInfo = e.detail.userInfo;
+    console.log(userInfo)
+    // setStorageSync('userInfo', userInfo);
+    app.wechat.setStorage('userInfo', userInfo)
+    app.wechat.setStorage('hasUserInfo', true)
+    
+    this.setData({
+      userInfo
+    });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let userInfo = wx.getStorageSync('userInfo');
+    if(userInfo.nickName){
+      console.log(userInfo)
+      this.setData({
+        userInfo
+      })
+    }else{
 
+    }
+    
   },
 
   /**

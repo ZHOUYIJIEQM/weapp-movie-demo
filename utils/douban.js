@@ -24,7 +24,7 @@ function find (type, page=1, count=20, search="") {
   let params = {
     start: (page-1) * count,
     count: count,
-    city: getApp().data.currentCity
+    city: getApp().globalData.currentCity
   };
   return fetchApi(type, search ? Object.assign(params, {q: search}) : params)
     .then(res => res.data);
